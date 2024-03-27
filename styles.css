@@ -1,0 +1,35 @@
+.comic-panel {
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.panel-img {
+  max-width: 88%;
+  max-height: 88%;
+}
+
+.panel-name {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1; /* Ensure buttons are above the image */
+}
+
+#prevBtn {
+  left: 10px;
+}
+
+#nextBtn {
+  right: 10px;
+}
