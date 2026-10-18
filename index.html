@@ -2,17 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comic Panel Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Blood Instinct #1 — A Web Comic by B.HaleyArt</title>
+  <meta name="description" content="Blood Instinct, Issue #1 — a web comic by B.HaleyArt. Read it free in your browser.">
+  <meta name="theme-color" content="#0b0a0b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blood Instinct #1">
+  <meta property="og:description" content="A web comic by B.HaleyArt. Read Issue #1 free in your browser.">
+  <meta property="og:image" content="https://bhaleyart.github.io/Blood-Instinct-1/web/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="thumbs/cover1.webp" type="image/webp">
+  <link rel="preload" as="image" href="web/cover1.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="comic-panel">
-    <img src="panel1.jpg" alt="Panel 1" class="panel-img">
-    <p class="panel-name">Panel 1</p>
-    <button id="prevBtn" class="btn">◄</button>
-    <button id="nextBtn" class="btn">►</button>
+  <header class="bar top-bar">
+    <h1 class="title">Blood Instinct <span class="issue">#1</span></h1>
+    <p class="counter" id="counter" aria-live="polite">Cover</p>
+    <div class="tools">
+      <button class="icon-btn" id="modeBtn" aria-pressed="false" title="Scroll mode (S)" aria-label="Toggle scroll reading mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v6H7zM7 15h10v6H7z"/></svg>
+      </button>
+      <button class="icon-btn" id="gridBtn" title="All pages (G)" aria-label="Show all pages" aria-expanded="false" aria-controls="grid">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+      </button>
+      <button class="icon-btn" id="zoomBtn" aria-pressed="false" title="Zoom (Z)" aria-label="Zoom page to full width">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M10.5 8v5M8 10.5h5"/></svg>
+      </button>
+      <button class="icon-btn" id="fsBtn" title="Fullscreen (F)" aria-label="Toggle fullscreen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="stage" class="stage">
+    <!-- Single-page mode -->
+    <div class="page-view" id="pageView">
+      <button class="nav prev" id="prevBtn" aria-label="Previous page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <figure class="page-frame" id="frame">
+        <img id="pageImg" class="page-img" src="web/cover1.webp" alt="Blood Instinct #1 — Cover" width="1200" height="1632" decoding="async">
+        <div class="spinner" aria-hidden="true"></div>
+      </figure>
+      <button class="nav next" id="nextBtn" aria-label="Next page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <!-- Scroll mode -->
+    <div class="scroll-view" id="scrollView" hidden></div>
+
+    <!-- End card -->
+    <section class="end-card" id="endCard" hidden>
+      <p class="end-kicker">End of Issue #1</p>
+      <h2>Blood Instinct</h2>
+      <p>Thanks for reading.</p>
+      <button class="pill" id="restartBtn">Read again from the cover</button>
+    </section>
+  </main>
+
+  <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+
+  <!-- Page grid -->
+  <div class="grid-overlay" id="grid" hidden>
+    <div class="grid-head">
+      <h2>All pages</h2>
+      <button class="icon-btn" id="gridClose" aria-label="Close page list">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <ol class="grid-list" id="gridList"></ol>
   </div>
+
+  <noscript>
+    <p class="noscript">This viewer needs JavaScript. You can still open the pages directly: <a href="web/cover1.webp">start with the cover</a>.</p>
+  </noscript>
 
   <script src="viewer.js"></script>
 </body>
